@@ -1,20 +1,37 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Mecha.gd" type="Script" id=1]
+[ext_resource path="res://res/TINY TN TILES.png" type="Texture" id=2]
+[ext_resource path="res://res/Chicken.png" type="Texture" id=3]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [  ],
+"frames": [ ExtResource( 3 ) ],
 "loop": true,
-"name": "default",
+"name": "active",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "unactive",
 "speed": 5.0
 } ]
 
-[node name="Mecha" type="Area2D"]
+[node name="Mecha" type="Area2D" groups=[
+"mecha",
+]]
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
+animation = "unactive"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -8, 8, 8, 8, 8, -8, -8, -8 )
+
+[node name="ToogleTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ActionPos" type="Position2D" parent="."]
+position = Vector2( 8, 0 )
+[connection signal="timeout" from="ToogleTimer" to="." method="toogle_active"]
