@@ -3,23 +3,23 @@ extends Area2D
 export var tag = ""
 export var activateAnimation = ""
 export var deactivateAnimation = ""
-export var is_toogleable = false
-export var default_is_active = false
-var is_active
+export var isToogleable = false
+export var defaultIsActive = false
+var isActive
 
 
 func _ready():
-	is_active = default_is_active
+	isActive = defaultIsActive
+	
+	$AnimatedSprite.play("active" if isActive else "unactive")
 
 
 # переклюение флага активности
 func toogle_active():
-	if is_active == default_is_active:
-		is_active = not default_is_active
-		
-		emit_signal("mecha_state_changed", is_active, tag)
-		
-	elif is_toogleable:
-		is_active = not default_is_active
-		
-		emit_signal("mecha_state_changed", is_active, tag)
+	
+	isActive = not isActive
+	
+	emit_signal("mecha_state_changed", isActive, tag)
+	
+	$AnimatedSprite.play("active" if isActive else "unactive")
+

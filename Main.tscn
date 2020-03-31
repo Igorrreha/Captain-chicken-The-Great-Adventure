@@ -11,23 +11,40 @@ extents = Vector2( 128, 8 )
 [node name="Main" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="Conosle" type="Label" parent="."]
-margin_right = 88.0
-margin_bottom = 80.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 128, 128 )
 shape = SubResource( 1 )
 
-[node name="Ladder" parent="." instance=ExtResource( 4 )]
+[node name="Ladders" type="Node" parent="."]
 
-[node name="Mecha" parent="." instance=ExtResource( 3 )]
+[node name="Ladder" parent="Ladders" instance=ExtResource( 4 )]
+scale = Vector2( 1, 16 )
+
+[node name="Mechas" type="Node" parent="."]
+
+[node name="Mecha" parent="Mechas" instance=ExtResource( 3 )]
 position = Vector2( 96, 112 )
+activateAnimation = "buttonPress"
+deactivateAnimation = "flyKick"
+isToogleable = true
+
+[node name="Mecha2" parent="Mechas" instance=ExtResource( 3 )]
+position = Vector2( 216, 112 )
+scale = Vector2( -1, 1 )
+activateAnimation = "buttonPress"
+deactivateAnimation = "flyKick"
+isToogleable = true
 
 [node name="Hero" parent="." instance=ExtResource( 1 )]
-position = Vector2( 120, 112 )
+position = Vector2( 128, 112 )
+z_index = 1
+
+[node name="Conosle" type="Label" parent="."]
+margin_right = 88.0
+margin_bottom = 80.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
