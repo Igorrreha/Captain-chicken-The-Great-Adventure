@@ -20,6 +20,10 @@ config/description="This is the story about brave chicken captain - the last hop
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Global="*res://global.gd"
+
 [display]
 
 window/size/width=256

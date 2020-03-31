@@ -1,7 +1,5 @@
 extends KinematicBody2D
 
-export var GRAV = 10
-
 enum STATE {IDLE, RUN, JUMP, JUMPING, FALL, LANDING, ON_LADDER, IN_ACTION}
 var state = STATE.IDLE
 
@@ -84,7 +82,7 @@ func _process(delta):
 		
 		# гравитация
 		if not is_on_floor():
-			moveVec.y += GRAV
+			moveVec.y += Global.GRAVITY.length()
 	
 	# обычное перемещение
 	else:
@@ -100,9 +98,9 @@ func _process(delta):
 			
 			# гравитация
 			if not is_on_floor():
-				moveVec.y += GRAV
+				moveVec.y += Global.GRAVITY.length()
 	
-	move_and_slide(moveVec, Vector2(0, -1))
+	move_and_slide(moveVec, Global.GRAVITY.normalized())
 	
 	set_state()
 	set_animation()
@@ -156,7 +154,7 @@ func set_state():
 		if is_on_floor():
 			if moveVec.y < 0:
 				jump_start()
-			elif moveVec.y > GRAV:
+			elif moveVec.y > Global.GRAVITY.length():
 				landing()
 				if moveVec.y > maxLandingSpeed:
 					hit(100)
